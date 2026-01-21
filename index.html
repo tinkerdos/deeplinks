@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Button Alert App</title>
+  <style>
+    body, html {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      font-family: sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column; /* change to column for up/down navigation */
+      gap: 2rem;
+      align-items: center;
+    }
+    button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 2px solid #666;
+      background: #fff;
+      transition: background 0.2s, border 0.2s;
+    }
+    button:focus {
+      outline: none;
+      border-color: #1976d2;
+      background: #e3f0ff;
+    }
+    button:hover {
+      background: #f0f0f0;
+    }
+  </style>
+  <script src="./lib/firebolt.js"></script>
+  <script>  
+    function firebolt_discovery() {
+      console.log('Firebolt Discovery Deeplink Button Clicked');
+     try{
+      Discovery.launch("xre:///guide/x2/settings/audio/bluetooth.xml",
+        {
+          action: 'deeplink',
+          context: { source: 'device' }
+        })
+        .then(() => {
+          console.log('Discovery deeplink launched successfully');
+        })
+        .catch(e => {
+          console.error('Error launching discovery deeplink:', e);
+          this.tag('Device').text.text = JSON.stringify(e)
+      })
+     } catch (error) {
+       console.error('Exception caught in firebolt_discovery:', error);
+     }
+    }
+    function badger_deeplink() {
+      console.log('Badger Deeplink Button Clicked');
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <button id="btn1" tabindex="0" onclick="firebolt_discovery()">Button 1</button>
+    <button id="btn2" tabindex="0" onclick="badger_deeplink()">Button 2</button>
+  </div>
+  <script>
+    
+    // Set focus to the first button on page load
+    window.onload = function() {
+      document.getElementById('btn1').focus();
+    }
+
+    const buttons = Array.from(document.querySelectorAll('button'));
+    buttons.forEach((btn, idx) => {
+      btn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          btn.click();
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = buttons[(idx + 1) % buttons.length];
+          next.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          const prev = buttons[(idx - 1 + buttons.length) % buttons.length];
+          prev.focus();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
