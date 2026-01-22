@@ -37,36 +37,11 @@
       background: #f0f0f0;
     }
   </style>
-  <script src="./lib/firebolt.js"></script>
-  <script>  
-    function firebolt_discovery() {
-      console.log('Firebolt Discovery Deeplink Button Clicked');
-     try{
-      Discovery.launch("xre:///guide/x2/settings/audio/bluetooth.xml",
-        {
-          action: 'deeplink',
-          context: { source: 'device' }
-        })
-        .then(() => {
-          console.log('Discovery deeplink launched successfully');
-        })
-        .catch(e => {
-          console.error('Error launching discovery deeplink:', e);
-          this.tag('Device').text.text = JSON.stringify(e)
-      })
-     } catch (error) {
-       console.error('Exception caught in firebolt_discovery:', error);
-     }
-    }
-    function badger_deeplink() {
-      console.log('Badger Deeplink Button Clicked');
-    }
-  </script>
-</head>
+  </head>
 <body>
   <div class="container">
-    <button id="btn1" tabindex="0" onclick="firebolt_discovery()">Button 1</button>
-    <button id="btn2" tabindex="0" onclick="badger_deeplink()">Button 2</button>
+    <button id="btn1" tabindex="0" onclick="firebolt_discovery()">firebolt Link</button>
+    <button id="btn2" tabindex="0" onclick="badger_deeplink()">badger Link</button>
   </div>
   <script>
     
@@ -93,5 +68,6 @@
       });
     });
   </script>
+  <script src="./dist/bundle.js"></script>
 </body>
 </html>
