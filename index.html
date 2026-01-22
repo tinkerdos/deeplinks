@@ -40,8 +40,8 @@
   </head>
 <body>
   <div class="container">
-    <button id="btn1" tabindex="0" onclick="firebolt_discovery()">firebolt Link</button>
-    <button id="btn2" tabindex="0" onclick="badger_deeplink()">badger Link</button>
+    <button id="btn1" tabindex="0" onclick="firebolt_discovery('xre:///guide/x2/settings/audio/bluetooth.xml')">BT Settings Firebolt</button>
+    <button id="btn2" tabindex="0" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')">BT Settings Badger</button>
   </div>
   <script>
     
@@ -68,6 +68,7 @@
       });
     });
   </script>
+  <script src="https://cdn.thor.comcast.com/sdk/money-badger.min.js"></script>
   <script src="./dist/bundle.js"></script>
 </body>
 </html>
