@@ -49,24 +49,6 @@
     window.onload = function() {
       document.getElementById('btn2').focus();
     }
-
-    const buttons = Array.from(document.querySelectorAll('button'));
-    buttons.forEach((btn, idx) => {
-      btn.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          // e.preventDefault();
-          // btn.click();
-        } else if (e.key === 'ArrowDown') {
-          e.preventDefault();
-          const next = buttons[(idx + 1) % buttons.length];
-          next.focus();
-        } else if (e.key === 'ArrowUp') {
-          e.preventDefault();
-          const prev = buttons[(idx - 1 + buttons.length) % buttons.length];
-          prev.focus();
-        }
-      });
-    });
   </script>
   <script src="https://cdn.thor.comcast.com/sdk/money-badger.min.js"></script>
   <script src="./dist/bundle.js"></script>
