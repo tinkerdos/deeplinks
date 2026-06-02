@@ -55,7 +55,7 @@
       btn.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          btn.click();
+          // btn.click();
         } else if (e.key === 'ArrowDown') {
           e.preventDefault();
           const next = buttons[(idx + 1) % buttons.length];
