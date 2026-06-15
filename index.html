@@ -55,10 +55,12 @@
       border: 1px solid rgba(255, 255, 255, 0.28);
       border-radius: 18px;
       color: #f4f7fb;
-      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
+      background: linear-gradient(180deg, rgba(255,255,255,0.26), rgba(255,255,255,0.10));
       font-size: 16px;
       cursor: pointer;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 10px 24px rgba(0, 0, 0, 0.22);
+      position: relative;
+      top: 0;
     }
 
     .glass-btn:last-child {
@@ -66,11 +68,16 @@
     }
 
     .glass-btn:hover {
-      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+      background: linear-gradient(180deg, rgba(255,255,255,0.44), rgba(255,255,255,0.18));
+      border-color: rgba(255, 255, 255, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42), 0 14px 32px rgba(0, 0, 0, 0.32);
     }
 
     .glass-btn:active {
-      background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+      top: 1px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 6px 14px rgba(0, 0, 0, 0.18);
     }
   </style>
 </head>
@@ -79,9 +86,9 @@
     <div id="tilesLayer"></div>
 
     <div class="center-card">
-      <button class="glass-btn" id="btn1" tabindex="0" onclick="firebolt_discovery('shellbluetoothoverlay')">BT Settings Firebolt (Shell)</button>
-      <button class="glass-btn" id="btn2" tabindex="1" onclick="firebolt_discovery('xrebluetoothoverlay')">BT Settings Firebolt (XRE)</button>
-      <button class="glass-btn" id="btn3" tabindex="2" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')">BT Settings Badger</button>
+      <button id="btn1" tabindex="0" class="glass-btn">Play</button>
+      <button id="btn2" tabindex="1"  class="glass-btn">Settings</button>
+      <button id="btn3" tabindex="2" class="glass-btn">Exit</button>
     </div>
   </div>
 
@@ -176,7 +183,7 @@
       document.getElementById('btn1').focus();
     }
 
-    const buttons = Array.from(document.querySelectorAll('button'));
+    const buttons = Array.from(document.querySelectorAll('.glass-btn'));
     buttons.forEach((btn, idx) => {
       btn.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -197,5 +204,5 @@
   <script src="https://cdn.thor.comcast.com/sdk/money-badger.min.js"></script>
   <script src="./dist/bundle.js"></script>
 </body>
-</body>
 </html>
+
