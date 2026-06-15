@@ -5,181 +5,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tiles and Glass Buttons</title>
   <style>
-    :root {
-      --tile-a: #1f2430;
-      --tile-b: #262c3a;
-      --glass-border: rgba(255, 255, 255, 0.28);
-      --text: #f4f7fb;
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #11151d;
+      color: #f4f7fb;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
+    .scene {
+      position: relative;
       width: 100%;
       height: 100%;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #11151d;
       overflow: hidden;
     }
 
-    body {
-      display: grid;
-      place-items: center;
-      color: var(--text);
-    }
-
-    .scene {
-      position: relative;
-      width: 1280px;
-      height: 720px;
-      padding: 24px;
-      isolation: isolate;
-    }
-
-    .grid {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      grid-template-rows: repeat(5, 1fr);
-      gap: 14px;
-      padding: 24px;
-    }
-
     .tile {
+      position: absolute;
       border-radius: 18px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    }
-
-    .tile:nth-child(odd) {
-      background: linear-gradient(145deg, var(--tile-a), var(--tile-a-deep));
-    }
-
-    .tile:nth-child(even) {
-      background: linear-gradient(145deg, var(--tile-b), var(--tile-b-deep));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      transition: background-image 250ms linear;
     }
 
     .center-card {
       position: absolute;
-      inset: 50% auto auto 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
+      left: 50%;
+      top: 50%;
+      width: 240px;
+      margin-left: -120px;
+      margin-top: -104px;
       padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 28px;
       background: rgba(10, 14, 22, 0.32);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
 
     .glass-btn {
-      min-width: 160px;
-      padding: 16px 22px;
-      border: 1px solid var(--glass-border);
+      display: block;
+      width: 100%;
+      margin: 0 0 14px 0;
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
       border-radius: 18px;
+      color: #f4f7fb;
       background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
-      color: var(--text);
       font-size: 16px;
-      letter-spacing: 0.02em;
       cursor: pointer;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.28),
-        0 10px 24px rgba(0, 0, 0, 0.22);
-      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 10px 24px rgba(0, 0, 0, 0.22);
+    }
+
+    .glass-btn:last-child {
+      margin-bottom: 0;
     }
 
     .glass-btn:hover {
-      transform: translateY(-2px);
       background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.34),
-        0 14px 28px rgba(0, 0, 0, 0.28);
     }
 
     .glass-btn:active {
-      transform: translateY(0);
-    }
-
-    @media (max-width: 700px) {
-      .grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(10, 1fr);
-        gap: 10px;
-        padding: 14px;
-      }
-
-      .center-card {
-        width: min(82vw, 280px);
-      }
-
-      .glass-btn {
-        width: 100%;
-      }
+      background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
     }
   </style>
 </head>
 <body>
-  <main class="scene">
-    <section class="grid" aria-hidden="true">
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
-    </section>
+  <div class="scene" id="scene">
+    <div id="tilesLayer"></div>
 
     <div class="center-card">
       <button class="glass-btn" id="btn1" tabindex="0" onclick="firebolt_discovery('shellbluetoothoverlay')">BT Settings Firebolt (Shell)</button>
       <button class="glass-btn" id="btn2" tabindex="1" onclick="firebolt_discovery('xrebluetoothoverlay')">BT Settings Firebolt (XRE)</button>
       <button class="glass-btn" id="btn3" tabindex="2" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')">BT Settings Badger</button>
     </div>
-  </main>
+  </div>
 
   <script>
     (function () {
-      var root = document.documentElement;
+      var scene = document.getElementById('scene');
+      var layer = document.getElementById('tilesLayer');
+      var tiles = [];
+      var tileCount = 40;
+      var start = new Date().getTime();
       var baseHue = Math.random() * 360;
-      var sat = 26 + Math.random() * 20;
-      var light = 18 + Math.random() * 8;
-      var drift = 20 + Math.random() * 30;
-      var start = performance.now();
+      var drift = 22 + Math.random() * 28;
+      var satBase = 28 + Math.random() * 18;
+      var lightBase = 18 + Math.random() * 8;
+      var raf = window.requestAnimationFrame || function (cb) {
+        return window.setTimeout(function () {
+          cb(new Date().getTime());
+        }, 16);
+      };
 
-      function setColors(now) {
+      function hsl(h, s, l) {
+        return 'hsl(' + h + 'deg ' + s + '% ' + l + '%)';
+      }
+
+      function makeTiles() {
+        var i;
+        for (i = 0; i < tileCount; i++) {
+          var tile = document.createElement('div');
+          tile.className = 'tile';
+          layer.appendChild(tile);
+          tiles.push(tile);
+        }
+      }
+
+      function layoutTiles() {
+        var width = scene.clientWidth;
+        var height = scene.clientHeight;
+        var cols = width < 700 ? 4 : 8;
+        var rows = 5;
+        var gap = width < 700 ? 10 : 14;
+        var pad = width < 700 ? 14 : 24;
+        var innerW = width - (pad * 2) - (gap * (cols - 1));
+        var innerH = height - (pad * 2) - (gap * (rows - 1));
+        var tileW = Math.floor(innerW / cols);
+        var tileH = Math.floor(innerH / rows);
+        var i;
+
+        for (i = 0; i < tiles.length; i++) {
+          var col = i % cols;
+          var row = Math.floor(i / cols) % rows;
+          tiles[i].style.left = (pad + col * (tileW + gap)) + 'px';
+          tiles[i].style.top = (pad + row * (tileH + gap)) + 'px';
+          tiles[i].style.width = tileW + 'px';
+          tiles[i].style.height = tileH + 'px';
+        }
+      }
+
+      function animate(now) {
         var t = (now - start) / 1000;
         var hueA = (baseHue + Math.sin(t * 0.55) * drift) % 360;
         var hueB = (baseHue + 26 + Math.cos(t * 0.7) * drift) % 360;
-        var hueC = (hueA + 12) % 360;
-        var hueD = (hueB + 12) % 360;
-        var satA = sat + Math.sin(t * 0.4) * 4;
-        var satB = sat + 5 + Math.cos(t * 0.45) * 4;
-        var lightA = light + Math.sin(t * 0.6) * 4;
-        var lightB = light + 5 + Math.cos(t * 0.5) * 4;
+        var satA = satBase + Math.sin(t * 0.4) * 4;
+        var satB = satBase + 5 + Math.cos(t * 0.45) * 4;
+        var lightA = lightBase + Math.sin(t * 0.6) * 4;
+        var lightB = lightBase + 5 + Math.cos(t * 0.5) * 4;
+        var i;
 
-        root.style.setProperty('--tile-a', 'hsl(' + hueA + 'deg ' + satA + '% ' + lightA + '%)');
-        root.style.setProperty('--tile-b', 'hsl(' + hueB + 'deg ' + satB + '% ' + lightB + '%)');
-        root.style.setProperty('--tile-a-deep', 'hsl(' + hueC + 'deg ' + (satA - 2) + '% ' + (lightA - 4) + '%)');
-        root.style.setProperty('--tile-b-deep', 'hsl(' + hueD + 'deg ' + (satB - 2) + '% ' + (lightB - 4) + '%)');
+        for (i = 0; i < tiles.length; i++) {
+          var odd = i % 2 === 0;
+          var top = odd ? hsl(hueA, satA, lightA) : hsl(hueB, satB, lightB);
+          var bottom = odd ? hsl((hueA + 12) % 360, satA - 2, lightA - 4) : hsl((hueB + 12) % 360, satB - 2, lightB - 4);
+          tiles[i].style.backgroundImage = 'linear-gradient(145deg, ' + top + ', ' + bottom + ')';
+        }
 
-        requestAnimationFrame(setColors);
+        raf(animate);
       }
 
-      requestAnimationFrame(setColors);
+      makeTiles();
+      layoutTiles();
+      raf(animate);
+
+      if (window.addEventListener) {
+        window.addEventListener('resize', layoutTiles);
+      } else if (window.attachEvent) {
+        window.attachEvent('onresize', layoutTiles);
+      }
     })();
-  
+  </script>
+  <script>
     // Set focus to the first button on page load
     window.onload = function() {
       document.getElementById('btn1').focus();
@@ -205,5 +196,6 @@
   </script>
   <script src="https://cdn.thor.comcast.com/sdk/money-badger.min.js"></script>
   <script src="./dist/bundle.js"></script>
+</body>
 </body>
 </html>
