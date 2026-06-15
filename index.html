@@ -1,62 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Button Alert App</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiles and Glass Buttons</title>
   <style>
-    
-    html {
-      height: 100vh;
+    :root {
+      --tile-a: #1f2430;
+      --tile-b: #262c3a;
+      --glass-border: rgba(255, 255, 255, 0.28);
+      --text: #f4f7fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
-      display: flex;
-      font-family: sans-serif;
-      align-items: center;
-      justify-content: center;
+      width: 100%;
+      height: 100%;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #11151d;
+      overflow: hidden;
     }
+
     body {
-  background-image: 
-    linear-gradient(45deg, #eee 25%, transparent 25%), 
-    linear-gradient(-45deg, #eee 25%, transparent 25%), 
-    linear-gradient(45deg, transparent 75%, #eee 75%), 
-    linear-gradient(-45deg, transparent 75%, #eee 75%);
-  background-size: 360px 360px;
-  background-position: 0 0, 0 180px, 180px -180px, -180px 0px;
-  background-color: #222;
-}
-    .container {
+      display: grid;
+      place-items: center;
+      color: var(--text);
+    }
+
+    .scene {
+      position: relative;
+      width: min(100vw, 1400px);
+      height: min(100vh, 900px);
+      padding: 24px;
+      isolation: isolate;
+    }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      gap: 14px;
+      padding: 24px;
+    }
+
+    .tile {
+      border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .tile:nth-child(odd) {
+      background: linear-gradient(145deg, var(--tile-a), var(--tile-a-deep));
+    }
+
+    .tile:nth-child(even) {
+      background: linear-gradient(145deg, var(--tile-b), var(--tile-b-deep));
+    }
+
+    .center-card {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
       display: flex;
-      flex-direction: column; /* change to column for up/down navigation */
-      gap: 2rem;
+      flex-direction: column;
       align-items: center;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 28px;
+      background: rgba(10, 14, 22, 0.32);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
-    button {
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
+
+    .glass-btn {
+      min-width: 160px;
+      padding: 16px 22px;
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
+      color: var(--text);
+      font-size: 16px;
+      letter-spacing: 0.02em;
       cursor: pointer;
-      border-radius: 8px;
-      border: 2px solid #666;
-      background: #fff;
-      transition: background 0.2s, border 0.2s;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        0 10px 24px rgba(0, 0, 0, 0.22);
+      transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
     }
-    button:focus {
-      outline: none;
-      color: #efefef
-      border-color: #d2d2ef;
-      background: #434343;
+
+    .glass-btn:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.34),
+        0 14px 28px rgba(0, 0, 0, 0.28);
     }
-    button:hover {
-      background: #f0f0f0;
+
+    .glass-btn:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(10, 1fr);
+        gap: 10px;
+        padding: 14px;
+      }
+
+      .center-card {
+        width: min(82vw, 280px);
+      }
+
+      .glass-btn {
+        width: 100%;
+      }
     }
   </style>
-  </head>
+</head>
 <body>
-  <div class="container">
-    <button id="btn1" tabindex="0" onclick="firebolt_discovery('shellbluetoothoverlay')">BT Settings Firebolt (Shell)</button>
-    <button id="btn2" tabindex="1" onclick="firebolt_discovery('xrebluetoothoverlay')">BT Settings Firebolt (XRE)</button>
-    <button id="btn3" tabindex="2" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')">BT Settings Badger</button>
-  </div>
+  <main class="scene">
+    <section class="grid" aria-hidden="true">
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+      <div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div>
+    </section>
+
+    <div class="center-card">
+      <button class="glass-btn" id="btn1" tabindex="0" onclick="firebolt_discovery('shellbluetoothoverlay')">BT Settings Firebolt (Shell)</button>
+      <button class="glass-btn" id="btn2" tabindex="1" onclick="firebolt_discovery('xrebluetoothoverlay')">BT Settings Firebolt (XRE)</button>
+      <button class="glass-btn" id="btn3" tabindex="2" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')">BT Settings Badger</button>
+    </div>
+  </main>
+
   <script>
-    
+    (function () {
+      var root = document.documentElement;
+      var baseHue = Math.random() * 360;
+      var sat = 26 + Math.random() * 20;
+      var light = 18 + Math.random() * 8;
+      var drift = 20 + Math.random() * 30;
+      var start = performance.now();
+
+      function setColors(now) {
+        var t = (now - start) / 1000;
+        var hueA = (baseHue + Math.sin(t * 0.55) * drift) % 360;
+        var hueB = (baseHue + 26 + Math.cos(t * 0.7) * drift) % 360;
+        var hueC = (hueA + 12) % 360;
+        var hueD = (hueB + 12) % 360;
+        var satA = sat + Math.sin(t * 0.4) * 4;
+        var satB = sat + 5 + Math.cos(t * 0.45) * 4;
+        var lightA = light + Math.sin(t * 0.6) * 4;
+        var lightB = light + 5 + Math.cos(t * 0.5) * 4;
+
+        root.style.setProperty('--tile-a', 'hsl(' + hueA + 'deg ' + satA + '% ' + lightA + '%)');
+        root.style.setProperty('--tile-b', 'hsl(' + hueB + 'deg ' + satB + '% ' + lightB + '%)');
+        root.style.setProperty('--tile-a-deep', 'hsl(' + hueC + 'deg ' + (satA - 2) + '% ' + (lightA - 4) + '%)');
+        root.style.setProperty('--tile-b-deep', 'hsl(' + hueD + 'deg ' + (satB - 2) + '% ' + (lightB - 4) + '%)');
+
+        requestAnimationFrame(setColors);
+      }
+
+      requestAnimationFrame(setColors);
+    })();
+  
     // Set focus to the first button on page load
     window.onload = function() {
       document.getElementById('btn1').focus();
