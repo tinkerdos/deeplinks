@@ -73,6 +73,22 @@
       border-color: #d2d2ef;
       background: #434343;
     }
+
+   .btn-title {
+      display: block;
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .btn-desc {
+      display: block;
+      margin-top: 4px;
+      font-size: 11px;
+      line-height: 1.3;
+      font-weight: 400;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
@@ -80,9 +96,10 @@
     <div id="tilesLayer"></div>
 
     <div class="center-card">
-    <button class="glass-btn" id="btn1" tabindex="0" onclick="firebolt_discovery('shellbluetoothoverlay')">Bluetooth Shell</button>
-      <button class="glass-btn" id="btn2" tabindex="1" onclick="firebolt_discovery('xrebluetoothoverlay')">Bluetooth Guide</button>
-      <button class="glass-btn" id="btn3" tabindex="2" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')">Bluetooth Badger</button>
+      <button class="glass-btn" id="btn1" tabindex="0" onclick="firebolt_discovery('shell:bluetoothoverlay')"><span class="btn-title">Bluetooth Overlay Shell</span><span class="btn-desc">gamingCapabilityService:launchBluetoothOverlay</span></button>
+      <button class="glass-btn" id="btn1" tabindex="1" onclick="firebolt_discovery('guide:bluetoothoverlay')"><span class="btn-title">Bluetooth Overlay Guide</span><span class="btn-desc">xre:///guide/x2/settings/audio/bluetooth_overlay.xml</span></button>
+      <button class="glass-btn" id="btn2" tabindex="2" onclick="firebolt_discovery('appmanager:bluetoothoverlay')"><span class="btn-title">Bluetooth Overlay ADS</span><span class="btn-desc">appmanager:launchApplication#appId=bluetooth.overlay</span></button>
+      <button class="glass-btn" id="btn3" tabindex="3" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')"><span class="btn-title">Bluetooth Guide Badger</span><span class="btn-desc">xre:///guide/x2/settings/audio/bluetooth.xml</span></button>
     </div>
   </div>
 
