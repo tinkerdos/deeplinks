@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+ <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tiles and Glass Buttons</title>
   <style>
@@ -80,9 +80,9 @@
     <div id="tilesLayer"></div>
 
     <div class="center-card">
-      <button class="glass-btn" id="btn1" tabindex="0" onclick="firebolt_discovery('shellbluetoothoverlay')">Bluetooth Shell</button>
-      <button class="glass-btn" id="btn2" tabindex="1" onclick="firebolt_discovery('xrebluetoothoverlay')">Bluetooth Guide</button>
-      <button class="glass-btn" id="btn3" tabindex="2" onclick="$badger.deeplink('xre:///guide/x2/settings/audio/bluetooth.xml')">Bluetooth Badger</button>
+      <button id="btn1" tabindex="0" class="glass-btn">Play</button>
+      <button id="btn2" tabindex="1"  class="glass-btn">Settings</button>
+      <button id="btn3" tabindex="2" class="glass-btn">Exit</button>
     </div>
   </div>
 
@@ -91,9 +91,11 @@
       var scene = document.getElementById('scene');
       var layer = document.getElementById('tilesLayer');
       var tiles = [];
+      var tileTimers = [];
+      var tileStates = [];
       var tileCount = 180;
 
-       function gray(light) {
+      function gray(light) {
         return 'hsl(0, 0%, ' + light + '%)';
       }
 
@@ -113,6 +115,7 @@
           var lightDelta = (Math.random() * 8) - 4;
           var opacityDelta = (Math.random() * 0.12) - 0.06;
           var light = Math.max(10, Math.min(58, state.light + lightDelta));
+          var opacity = Math.max(0.72, Math.min(1, state.opacity + opacityDelta));
 
           state.light = light;
           state.opacity = opacity;
