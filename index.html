@@ -28,7 +28,6 @@
 
     .tile {
       position: absolute;
-      border-radius: 18px;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
       transition: background-image 250ms linear;
     }
@@ -122,8 +121,8 @@
         var height = scene.clientHeight;
         var cols = width < 700 ? 4 : 8;
         var rows = 5;
-        var gap = width < 700 ? 10 : 14;
-        var pad = width < 700 ? 14 : 24;
+        var gap = 1;
+        var pad = 1;
         var innerW = width - (pad * 2) - (gap * (cols - 1));
         var innerH = height - (pad * 2) - (gap * (rows - 1));
         var tileW = Math.floor(innerW / cols);
